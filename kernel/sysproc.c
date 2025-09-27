@@ -105,3 +105,31 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+
+uint64
+sys_getppid(void)
+{
+  return myproc()->parent->pid;
+}
+
+uint64
+sys_getancestor(void)
+{
+  int n;
+  
+  // Versión alternativa para obtener argumentos
+  n = myproc()->trapframe->a0;  // Primer argumento
+  
+  if(n < 0)
+    return -1;
+    
+  struct proc *p = myproc();
+  
+  for(int i = 0; i < n; i++) {
+    if(p->parent == 0)
+      return -1;
+    p = p->parent;
+  }
+  
+  return p->pid;
+}
