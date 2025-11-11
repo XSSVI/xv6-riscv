@@ -133,3 +133,16 @@ sys_getancestor(void)
   
   return p->pid;
 }
+
+uint64
+sys_settickets(void)
+{
+  int n;
+  argint(0, &n);  // Simplemente obtenemos el argumento
+
+  if(n < 1)
+    n = 1;
+
+  myproc()->tickets = n;
+  return 0;
+}

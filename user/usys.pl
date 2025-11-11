@@ -44,3 +44,4 @@ entry("getancestor");
 entry("sbrk");
 entry("pause");
 entry("uptime");
+entry("settickets");
